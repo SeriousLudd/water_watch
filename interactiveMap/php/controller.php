@@ -14,10 +14,10 @@ try{
 
 $sql = "SELECT * FROM water_watch";
 
-// On prépare la requête
+// Request prepare
 $query = $db->prepare($sql);
 
-// On exécute la requête
+// Request execution
 $query->execute();
 
 while($row = $query->fetch(PDO::FETCH_ASSOC)){
@@ -54,5 +54,5 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
     $tableauRivers['watcher_watch'][] = $rivers;
 }
 
-// On encode en json et on envoie
+// JSON encode
 echo json_encode($tableauRivers);

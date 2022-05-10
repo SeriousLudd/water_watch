@@ -4,8 +4,6 @@ var isUnique = true;
 // init map
 var map = L.map('map').setView([47.25408084297041, 2.262939453125001], 6);
 
-
-
 // tiles loading
 L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors </a>',
@@ -122,7 +120,6 @@ xmlhttp.onreadystatechange = () => {
 
 
 // Lecture de la table water_watch pour générer les marqueurs 
-
 xmlhttp.open("GET", "https://dev.lavigiedeleau.eu/wp-content/themes/child/interactiveMap/php/controller.php");
 xmlhttp.send(null);
 }
@@ -138,7 +135,7 @@ function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
 
-// fonctions
+// fonctions de réactualisation des marqueurs 
 function updateMarkers() {
     layerGroup.clearLayers();
     setTimeout(function() {addMarkers();
