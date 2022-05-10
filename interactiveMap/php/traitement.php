@@ -1,8 +1,8 @@
-<?php 
+<?php
 //get the form elements and store them in variables
 $name=$_POST["name"]; 
 $utilisateur=$_POST["user"];
-$identifiant=$_POST["identifiant"];
+$identifiant= $_POST["identifiant"];
 $latitude=$_POST["latitude"]; 
 $longitude=$_POST["longitude"];
 $temperature_moy=$_POST["tempMoy"]; 
@@ -24,9 +24,9 @@ $interpretation_nitrite=$_POST["conNitri"]*3.28;
 $etat_mesure=$_POST["etatMesure"]; 
 $observations=$_POST["observations"]; 
 
-
 //establish connection
 $con = mysqli_connect("localhost","sc4iouston_dbu_dev","THAQP72²WE$@++z{d50","sc4iouston_db_dev"); 
+
 //on connection failure, throw an error
 if(!$con) {  
 die('Could not connect: '.mysql_error()); 
@@ -35,7 +35,8 @@ die('Could not connect: '.mysql_error());
 //check ident already existant
 $select = mysqli_query($con, "SELECT `identifiant` FROM `water_watch` WHERE `identifiant` = '".$_POST['identifiant']."'") or exit(mysqli_error($con));
 if(mysqli_num_rows($select)) {
-    echo "<script>alert(\"la variable est nulle\")</script>";
+echo "<script type='text/javascript'>alert('ERREUR: Cet identifiant est déjà utilisé pour un point. Merci de rentrer un identifiant unique.');</script>"; 
+
 } else {
 $sql="INSERT INTO `sc4iouston_db_dev`.`water_watch` (`utilisateur`, `name` , `identifiant` , `gps_latitude`, `gps_longitude`, `temperature_moy`, `ph_moy`, `ph_bandelette`, `ph_interpretation`, `ph_moy_mV`, `conductivite_moy`,
  `conductivite_moy_mV`, `turbidite_moy_NTU`, `turbidite_moy_mV`, `turbidite_interpretation`, `profondeur`, `debit_interpretation`, `concentration_nitrate`, `concentration_nitrite`, `interpretation_nitrate`, 
@@ -45,7 +46,4 @@ VALUES ('$utilisateur', '$name', '$identifiant', '$latitude', '$longitude', '$te
 mysqli_query($con,$sql); 
 
 }
-
-//Redirects to the specified page
-header("Location: https://dev.lavigiedeleau.eu/carte-interactive-ww/"); 
 ?>
