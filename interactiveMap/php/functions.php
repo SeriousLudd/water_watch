@@ -30,9 +30,8 @@ function cc_scripts() {
 // STYLE PAGE INTERACTIVE WATER WATCH 
 function wpse_enqueue_page_template_styles() {
   if ( is_page_template( 'PageInteractiveMap.php' ) ) {
-      wp_enqueue_style( 'page-template', get_stylesheet_directory_uri() . '/interactiveMap/css/interactiveMap.css', null, '1.31' );
+      wp_enqueue_style( 'page-template', get_stylesheet_directory_uri() . '/interactiveMap/css/interactiveMap.css', null, '1.34' );
       
   }
 }
 add_action( 'wp_enqueue_scripts', 'wpse_enqueue_page_template_styles' );
-

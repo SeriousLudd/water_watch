@@ -1,24 +1,22 @@
-<?php 
+<?php /*Template Name: PageInteractiveMap */;?>
+<?php get_header(); ?>
+	<div id="container" >
 
-/* Template Name: PageInteractiveMap */ 
+			<?php /* The loop */ ?>
+			<?php while ( have_posts() ) : the_post(); ?>
+				
+				<h1><?php the_title(); ?></h1>
+				
+				<?php the_content(); ?>
 
-get_header();
-	if ( have_posts() ) : while ( have_posts() ) : the_post();
-?>
-
-
-
-	<h1><?php the_title(); ?></h1>
-    <div class="content">
-    	<?php the_content(); ?>
-		<div class="entry-content">
-
-	</div>
-    </div>
-
+				
+     
+				<!------------>
+			<?php endwhile; ?>
 	
 
-<?php
-	endwhile; endif;
-	get_footer();
-?>
+
+	</div><!-- #primary -->
+
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

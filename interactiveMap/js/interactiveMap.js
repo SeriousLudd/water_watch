@@ -1,3 +1,5 @@
+// variable
+var isUnique = true;
 
 // init map
 var map = L.map('map').setView([47.25408084297041, 2.262939453125001], 6);
@@ -10,11 +12,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
     maxZoom: 20
 }).addTo(map);
 
+// init layers
+var layerGroup = L.layerGroup().addTo(map);
+
 // ajout du marqueur
+function addMarkers(){
 let xmlhttp = new XMLHttpRequest();
-
 xmlhttp.onreadystatechange = () => {
-
 
     // La transaction est terminée ?
     if (xmlhttp.readyState == 4) {
@@ -76,9 +80,9 @@ xmlhttp.onreadystatechange = () => {
                         return "Donnée éronnée (" + rivers[1].interpretation_nitrite + ")";
                     }
                 };
-
+                
                 // on met le marqueur rivière
-                let marker = L.marker([rivers[1].gps_latitude, rivers[1].gps_longitude]).addTo(map)
+                let marker = L.marker([rivers[1].gps_latitude, rivers[1].gps_longitude]).addTo(layerGroup)
                 marker.bindPopup("<b>Identifiant:</b> " + rivers[1].identifiant
                     + "<br><b> Temp Moyenne (°C):</b> " + rivers[1].temperature_moy
                     + "<br><b> Interpr. pH:</b> " + interpretationPH()
@@ -86,7 +90,7 @@ xmlhttp.onreadystatechange = () => {
                     + "<br><b> Interpr. Turbidité:</b> " + rivers[1].turbidite_interpretation
                     + "<br><b> Interpr. Nitrate:</b> " + interpretationNitrate()
                     + "<br><b> Interpr. Nitrite:</b> " + interpretationNitrite()
-                    + "<details><summary>Voir plus</summary><br>" + rivers[1].gps_latitude
+                    + "<details><summary>Voir plus</summary><br>"
                     + "<br><b>Utilisateur:</b> " + rivers[1].utilisateur
                     + "<br><b> Nom:</b> " + rivers[1].nom
                     + "<br><b> Latitude:</b> " + rivers[1].gps_latitude
@@ -112,10 +116,14 @@ xmlhttp.onreadystatechange = () => {
     }
 }
 
-// Lecture de la table water_watch pour générer les marqueurs 
 
+
+// Lecture de la table water_watch pour générer les marqueurs 
 xmlhttp.open("GET", "https://dev.lavigiedeleau.eu/wp-content/themes/child/interactiveMap/php/controller.php");
 xmlhttp.send(null);
+}
+
+addMarkers();
 
 // Pop-up formulaire
 function openForm() {
@@ -126,8 +134,14 @@ function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
 
+// fonctions de réactualisation des marqueurs 
+function updateMarkers() {
+    layerGroup.clearLayers();
+    setTimeout(function() {addMarkers();
+      }, 1000);
+    
+}
+
 // Module plein écran de la carte 
 map.addControl(new L.Control.Fullscreen());
-
-// Check ident
 
