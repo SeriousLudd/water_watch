@@ -118,7 +118,6 @@ xmlhttp.onreadystatechange = () => {
 
 
 
-
 // Lecture de la table water_watch pour générer les marqueurs 
 xmlhttp.open("GET", "https://dev.lavigiedeleau.eu/wp-content/themes/child/interactiveMap/php/controller.php");
 xmlhttp.send(null);
